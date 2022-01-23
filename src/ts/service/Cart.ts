@@ -11,15 +11,10 @@ export default class Cart {
         return [...this._items];
     }
     sum(): number {
-        let sum = 0;
-        this._items.forEach((item: Buyable) => sum += item.price)
-        return sum
+        return this._items.reduce((sum, current: Buyable) => sum += current.price, 0)
     }
     reducedSum(discount: number): number {
-        let sum = 0;
-        this._items.forEach((item: Buyable) => sum += item.price)
-        sum = sum * (1 - discount/100);
-        return sum
+        return this.sum() * (1 - discount / 100)
     }
     removeItem(id: number): void {
         this._items = this._items.filter((item: Buyable) => item.id !== id);
